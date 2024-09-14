@@ -8,6 +8,8 @@ crash.log
 # Ignore backup files
 *.backup
 
+# Ignore .terraform directories
+**/.terraform/*
 
 # Ignore the override files
 *.tfvars
