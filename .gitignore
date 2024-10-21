@@ -27,3 +27,10 @@ terraform.rc
 
 # Ignore the .pem key
 *.pem
+
+# ignore docker files
+Dockerfile
+nginx.conf
+html/index.html
+
+
