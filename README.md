@@ -2,7 +2,7 @@
 
 As for each assignment, i have wrote them inside of each directory.
 
-## Terraform assignment 0914 (Backend S3 & DynamoDB)
+# Assignment Description
 
 | Assignment | Link |
 |------------|------|
