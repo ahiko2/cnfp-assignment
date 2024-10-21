@@ -1,5 +1,5 @@
 resource "local_file" "index_html" {
-    filename = "${path.module}/html/index.html"
+    filename = "${path.module}/DockerImage/html/index.html"
     content  = <<-EOF
     <html>
         <head>
@@ -34,9 +34,10 @@ resource "local_file" "index_html" {
         </body>
     </html>
     EOF
-    
 }
+
 resource "local_file" "nginx_conf" {
+    filename = "${path.module}/DockerImage/nginx.conf"
     content  = <<-EOF
         events {
             worker_connections 1024;
@@ -56,20 +57,19 @@ resource "local_file" "nginx_conf" {
             }
         }
     EOF
-    filename = "${path.module}/nginx.conf"
 }
 
 resource "local_file" "dockerfile" {
-    filename = "${path.module}/Dockerfile"
+    filename = "${path.module}/DockerImage/Dockerfile"
     content  = <<-EOT
     # Use the official NGINX base image
     FROM nginx:latest
 
     # Copy the custom NGINX configuration file
-    COPY nginx.conf /etc/nginx/nginx.conf
+    COPY DockerImage/nginx.conf /etc/nginx/nginx.conf
 
     # Copy your static website files (optional)
-    COPY html /usr/share/nginx/html
+    COPY DockerImage/html /usr/share/nginx/html
 
     # Expose the desired port
     EXPOSE 1918
@@ -78,10 +78,11 @@ resource "local_file" "dockerfile" {
     CMD ["nginx", "-g", "daemon off;"]
     EOT
 }
+
 resource "docker_image" "nginx_image" {
     name         = "custom_nginx_sithu:hellocloud"
     build {
         context    = "${path.module}"
-        dockerfile = "${path.module}/Dockerfile"
+        dockerfile = "${path.module}/DockerImage/Dockerfile"
     }
 }

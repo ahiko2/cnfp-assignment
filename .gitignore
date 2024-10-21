@@ -31,6 +31,6 @@ terraform.rc
 # ignore docker files
 Dockerfile
 nginx.conf
-html/index.html
+DockerImage
 
 
